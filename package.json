@@ -6,8 +6,8 @@
   "scripts": {
     "install": "bower install",
     "start": "electron main.js ",
-    "microphone-debug" : "electron scripts/microphone-debug/main.js",
-    "train-model" : "electron scripts/train-model.js",
+    "microphone-debug": "electron scripts/microphone-debug/main.js",
+    "train-model": "electron scripts/train-model.js",
     "wiredep": "wiredep -s index.html"
   },
   "repository": {

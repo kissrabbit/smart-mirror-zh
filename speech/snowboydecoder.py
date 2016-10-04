@@ -20,7 +20,8 @@ DETECT_DONG = os.path.join(TOP_DIR, "resources/dong.wav")
 
 class RingBuffer(object):
     """Ring buffer to hold audio from PortAudio"""
-    def __init__(self, size = 4096):
+
+    def __init__(self, size=4096):
         self._buf = collections.deque(maxlen=size)
 
     def extend(self, data):
@@ -69,6 +70,7 @@ class HotwordDetector(object):
                               default sensitivity in the model will be used.
     :param audio_gain: multiply input volume by this factor.
     """
+
     def __init__(self, decoder_model,
                  resource=RESOURCE_FILE,
                  sensitivity=[],
@@ -93,7 +95,7 @@ class HotwordDetector(object):
         self.num_hotwords = self.detector.NumHotwords()
 
         if len(decoder_model) > 1 and len(sensitivity) == 1:
-            sensitivity = sensitivity*self.num_hotwords
+            sensitivity = sensitivity * self.num_hotwords
         if len(sensitivity) != 0:
             assert self.num_hotwords == len(sensitivity), \
                 "number of hotwords in decoder_model (%d) and sensitivity " \
@@ -113,7 +115,6 @@ class HotwordDetector(object):
             rate=self.detector.SampleRate(),
             frames_per_buffer=2048,
             stream_callback=audio_callback)
-
 
     def start(self, detected_callback=play_audio_file,
               interrupt_check=lambda: False,
@@ -167,7 +168,7 @@ class HotwordDetector(object):
                 message += time.strftime("%Y-%m-%d %H:%M:%S",
                                          time.localtime(time.time()))
                 logger.info(message)
-                callback = detected_callback[ans-1]
+                callback = detected_callback[ans - 1]
                 if callback is not None:
                     callback()
 

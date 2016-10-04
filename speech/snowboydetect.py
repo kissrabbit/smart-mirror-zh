@@ -9,6 +9,7 @@
 
 
 from sys import version_info
+
 if version_info >= (2, 6, 0):
     def swig_import_helper():
         from os.path import dirname
@@ -25,6 +26,8 @@ if version_info >= (2, 6, 0):
             finally:
                 fp.close()
             return _mod
+
+
     _snowboydetect = swig_import_helper()
     del swig_import_helper
 else:
@@ -70,6 +73,7 @@ def _swig_getattr_nondynamic(self, class_type, name, static=1):
     else:
         raise AttributeError(name)
 
+
 def _swig_getattr(self, class_type, name):
     return _swig_getattr_nondynamic(self, class_type, name, 0)
 
@@ -81,12 +85,15 @@ def _swig_repr(self):
         strthis = ""
     return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
 
+
 try:
     _object = object
     _newclass = 1
 except AttributeError:
     class _object:
         pass
+
+
     _newclass = 0
 
 
@@ -133,11 +140,12 @@ class SnowboyDetect(_object):
 
     def BitsPerSample(self):
         return _snowboydetect.SnowboyDetect_BitsPerSample(self)
+
     __swig_destroy__ = _snowboydetect.delete_SnowboyDetect
     __del__ = lambda self: None
+
+
 SnowboyDetect_swigregister = _snowboydetect.SnowboyDetect_swigregister
 SnowboyDetect_swigregister(SnowboyDetect)
 
 # This file is compatible with both classic and new-style classes.
-
-
