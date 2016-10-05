@@ -21,7 +21,7 @@
                         ScrobblerService,
                         $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
-        // Local Scope Vars
+        // 局部变量
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
@@ -38,9 +38,9 @@
             $scope.fitbitEnabled = true;
         }
 
-        //set lang
+        //设置语言
         moment.locale(
-            (typeof config.language !== 'undefined') ? config.language.substring(0, 2).toLowerCase() : 'en',
+            (typeof config.language !== 'undefined') ? config.language.toLowerCase() : 'en',
             {
                 calendar: {
                     lastWeek: '[Last] dddd',
@@ -59,7 +59,7 @@
         function updateTime() {
             $scope.date = new moment();
 
-            // Auto wake at a specific time
+            // 在某个时间唤醒屏幕
             if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.auto_wake !== 'undefined' && config.autoTimer.auto_wake == moment().format('HH:mm:ss')) {
                 console.debug('Auto-wake', config.autoTimer.auto_wake);
                 $scope.focus = "default";
@@ -68,7 +68,7 @@
             }
         }
 
-        // Reset the command text
+        // 重置命令
         var restCommand = function () {
             $translate('home.commands').then(function (translation) {
                 $scope.interimResult = translation;
@@ -93,7 +93,7 @@
             updateTime();
             GeolocationService.getLocation({enableHighAccuracy: true}).then(function (geoposition) {
                 console.log("Geoposition", geoposition);
-                $scope.map = MapService.generateMap(geoposition.coords.latitude + ',' + geoposition.coords.longitude);
+                $scope.map = MapService.generateMap(geoposition.content.point.X + ',' + geoposition.content.point.Y);
             });
             restCommand();
 
@@ -135,8 +135,11 @@
             }
 
             var refreshWeatherData = function () {
+                //var location = GeolocationService.getLocation();
+                //console.log(location);
+
                 //Get our location and then get the weather for our location
-                GeolocationService.getLocation({enableHighAccuracy: true}).then(function (geoposition) {
+                GeolocationService.getLocation().then(function (geoposition) {
                     console.log("Geoposition", geoposition);
                     WeatherService.init(geoposition).then(function () {
                         $scope.currentForecast = WeatherService.currentForecast();
@@ -164,8 +167,9 @@
                 });
             };
 
-            if (typeof config.forecast !== 'undefined') {
-                registerRefreshInterval(refreshWeatherData, config.forecast.refreshInterval || 2);
+            //每5分钟刷新天气
+            if (typeof config.weather !== 'undefined') {
+                registerRefreshInterval(refreshWeatherData, config.weather.refreshInterval || 5);
             }
 
             var greetingUpdater = function () {

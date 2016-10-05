@@ -3,6 +3,7 @@
 //! author  : Tal Ater @TalAter
 //! license : MIT
 //! https://www.TalAter.com/annyang/
+//! 一个通过网页语音来识别动作的js库
 //! Modified by Evan Cohen
 
 (function (undefined) {

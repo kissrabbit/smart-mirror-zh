@@ -88,23 +88,21 @@ if (typeof config.speech == 'undefined') {
 var modelFile = config.speech.model || "smart_mirror.pmdl"
 var kwsSensitivity = config.speech.sensitivity || 0.5
 
-/*
- // 初始化关键词识别
- var kwsProcess = spawn('python', ['./speech/kws.py', modelFile, kwsSensitivity], {detached: false})
- // 通过python脚本处理信息
- kwsProcess.stderr.on('data', function (data) {
- var message = data.toString()
- if (message.startsWith('INFO')) {
- // 当一个关键字被识别时，调用语音服务。
- mainWindow.webContents.send('keyword-spotted', true)
- } else {
- console.error(message)
- }
- })
- kwsProcess.stdout.on('data', function (data) {
- console.log(data.toString())
- })
- */
+// 初始化关键词识别
+var kwsProcess = spawn('python', ['./speech/kws.py', modelFile, kwsSensitivity], {detached: false})
+// 通过python脚本处理信息
+kwsProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    if (message.startsWith('INFO')) {
+        // 当一个关键字被识别时，调用语音服务。
+        mainWindow.webContents.send('keyword-spotted', true)
+    } else {
+        console.error(message)
+    }
+})
+kwsProcess.stdout.on('data', function (data) {
+    console.log(data.toString())
+})
 
 // 当Electron完成初始化并且已经创建了浏览器窗口，则该方法将会被调用。
 // 有些API只能在该事件发生后才能被使用。

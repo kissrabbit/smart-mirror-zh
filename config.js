@@ -1,7 +1,7 @@
 var config = {
 
-    // Lenguage for the mirror
-    language: "en-US",
+    // 魔镜的语言
+    language: "zh-cn",
 
     // Keyword Spotting (Hotword Detection)
     speech: {
@@ -24,13 +24,21 @@ var config = {
      */
 
     //use this only if you want to hardcode your geoposition (used for weather)
-    /*
-     geoPosition: {
+    /*geoPosition: {
      latitude: 78.23423423,
      longitude: 13.123124142
-     },
-     */
+     },*/
 
+    baidu: {
+        ak: "FGpiDV0dLIXIWKlXGLWYudppLbUekAoR",  //开放平台应用api key
+        apiKey: "984c0ddcd2b571964ccc5a7c6b2077fc",//调用百度天气查询接口api key 通用的
+    },
+
+    weather: {
+        city: "上海",
+        BaiduApiKey: "984c0ddcd2b571964ccc5a7c6b2077fc",
+        refreshInterval: 5,
+    },
 
     // lights
     light: {
@@ -69,7 +77,7 @@ var config = {
         icals: [], // Be sure to wrap your URLs in quotes
         maxResults: 9, // Number of calender events to display (Defaults is 9)
         maxDays: 365, // Number of days to display (Default is one year)
-        showCalendarNames: false // Show calendar names above events
+        showCalendarNames: true // Show calendar names above events
     },
     // Giphy
     giphy: {
