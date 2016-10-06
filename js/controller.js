@@ -1,4 +1,5 @@
 (function (angular) {
+    //严格模式
     'use strict';
 
     function MirrorCtrl(SpeechService,
@@ -144,12 +145,12 @@
                     WeatherService.init(geoposition).then(function () {
                         $scope.currentForecast = WeatherService.currentForecast();
                         $scope.weeklyForecast = WeatherService.weeklyForecast();
-                        $scope.hourlyForecast = WeatherService.hourlyForecast();
-                        $scope.minutelyForecast = WeatherService.minutelyForecast();
+                        //$scope.hourlyForecast = WeatherService.hourlyForecast();
+                        //$scope.minutelyForecast = WeatherService.minutelyForecast();
                         console.log("Current", $scope.currentForecast);
                         console.log("Weekly", $scope.weeklyForecast);
-                        console.log("Hourly", $scope.hourlyForecast);
-                        console.log("Minutely", $scope.minutelyForecast);
+                        //console.log("Hourly", $scope.hourlyForecast);
+                        //console.log("Minutely", $scope.minutelyForecast);
 
                         var skycons = new Skycons({"color": "#aaa"});
                         skycons.add("icon_weather_current", $scope.currentForecast.iconAnimation);
@@ -251,7 +252,7 @@
                 }, function (error) {
                     console.log(error);
                 });
-            }
+            };
 
             if (typeof config.stock !== 'undefined' && config.stock.names.length) {
                 registerRefreshInterval(getStock, 30);
@@ -274,8 +275,8 @@
 
             var refreshRss = function () {
                 console.log("Refreshing RSS");
-                $scope.news = null;
-                RssService.refreshRssList();
+                //$scope.news = null;
+                //RssService.refreshRssList();
             };
 
             var updateNews = function () {

@@ -89,30 +89,32 @@
     <div class="top-right">
         <div class="weather">
             <div class="weather-today">
-                <span class="icon dimmed wi {{currentForecast.wi}}"></span>
+                <span class="icon dimmed wi {{currentForecast.counter}}"></span>
                 <canvas id="icon_weather_current" width="90" height="70"></canvas>
-                <span class="temperature" ng-show="currentForecast.temperature"
-                      ng-bind="currentForecast.temperature + '&deg;'"></span>
+                <span class="temperature" ng-show="currentForecast.curTemp"
+                      ng-bind="currentForecast.curTemp"></span>
             </div>
+
             <div class="weather-week-descriptor">
-                <span ng-bind="minutelyForecast.summary"></span>
-                <span ng-bind="hourlyForecast.summary"></span>
-                <span ng-bind="weeklyForecast.summary"></span>
+                <span ng-bind="currentForecast.type"></span>
+                <span ng-bind="currentForecast.index[5].details"></span>
             </div>
-            <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
+
+            <div class="weather-week" ng-repeat="forecast in weeklyForecast" ng-if="$index >= 0">
                 <div class="weather-week-day">
-                    <span class="day light-grey" ng-bind="forecast.day"></span>
+                    <span class="day light-grey" ng-bind="forecast.date"></span>
                     <canvas id="icon_weather_{{forecast.counter}}" width="33" height="25"></canvas>
-                    <span class="icon-small dimmed wi wi-fw {{forecast.wi}}"></span>
-                    <span class="temperature temperature-min" ng-bind="forecast.temperatureMin + '&deg;'"></span>
-                    <span class="temperature temperature-max" ng-bind="forecast.temperatureMax + '&deg;'"></span>
+                    <span class="icon-small dimmed wi wi-fw wi-sunrise"></span>
+                    <span class="temperature temperature-min" ng-bind="forecast.lowtemp"></span>
+                    <span class="temperature temperature-max" ng-bind="forecast.hightemp"></span>
                 </div>
             </div>
             <!-- Workaround: -->
-            <div style="display: none;" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
+            <div style="display: none;" ng-repeat="forecast in weeklyForecast.forecast" ng-if="$index >= 0">
                 <span ng-init="iconLoad('icon_weather_'+forecast.counter, forecast.iconAnimation)"></span>
             </div>
         </div>
+
         <div class="traffic" ng-repeat="traffic in trips">
             <div ng-show="!traffic.error" class="traffic-information">
                 <span class="time-to" ng-bind="'traffic.time_to' | translate:traffic"></span>
